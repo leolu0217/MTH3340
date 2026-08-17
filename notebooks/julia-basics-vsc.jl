@@ -5,6 +5,9 @@ using LinearAlgebra
 
 using Plots
 
+
+
+
 md"# Basic Julia syntax
 
 In this tutorial, we will learn the basic syntax of `Julia`. This part is not as deep as the previous part. If you know Python, you will see that the differences are not that important.
@@ -20,7 +23,7 @@ If `x` and `y` are `Bool`, we can also express (not `x`) as `!x`, (`x` and `y`) 
 a = 10
 
 x = (a > 7)
-
+#negation
 !x
 
 y = (a > 2) && (a < 8)
@@ -28,7 +31,7 @@ y = (a > 2) && (a < 8)
 z = (a > 2) || (a < 8)
 
 q = a > 5 ?  10 : a + "hello" # short-circuited
-
+l= a < 5 ?  10 : a + "hello" # integer plus string which is not good
 
 md"## For loops
 
@@ -54,6 +57,7 @@ begin
    end
 end
 
+#we can write 2 for-loop togeth
 begin
    e = 0
    for i in 1:100, j in 1:100
@@ -88,11 +92,11 @@ Let us consider Leibniz formula for π.
 β(m) = m == 1 ? 0 : 1
 
 function Leibniz_formula(n) # n is number of terms
-	c = 0; s = 0
+	#c = 0;
+	 s = 0;
 	for i in 0:n
-		j = 2*i+1
-		s = s + 1/j*(-1)^c
-		c = β(c)
+		s = s + 1/(2*i+1)*(-1)^i
+		#c = β(c)
 	end
 	return 4s # or just 4s
 end
@@ -114,7 +118,7 @@ Functions that mutate their input are indicated in `Julia` with `!` (notation)."
 
 begin # multiple def'on creates problems in Pluto, better use the REPL
 	mv = [1,2,3]
-	function add_one_in_j!(y,j)
+	function add_one_in_j!(y,j) #the ! in the function is telling julia that I am doing some change to the function
 		y[j] = y[j]+1
 		y
 	end
@@ -149,6 +153,10 @@ end
 md"Now we call this function, using an anonymous function."
 
 bisection(x -> 3x^2-2,0,2) # x -
+ 
+w(x)=x^2;
+
+bisection(w,-1,1)
 
 md"## Arrays, vectors and matrices
 

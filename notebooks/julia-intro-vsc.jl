@@ -3,6 +3,8 @@ using InteractiveUtils
 
 using Gridap
 
+
+## Intro
 a = 5+3
 
 typeof(a)
@@ -27,19 +29,18 @@ floor(Int64,7.6)
 ceil(Int64,7.6)
 
 Float64("hello")
-
+## Functions
 f(x) = x^2
-
 f(2)
 
 f(1.5)
-
+#x can be a matrix which is is the A time A as in 2 matrix
 f([1 0; 0 2])
-
+#print_tree(Real) to check what is accepted
 nice_sum(a::Real,b::Real) = "The sum of these two Float64 numbers is $(a+b)"
 
 nice_sum(1.0,2.0) # We have not implemented this! Why does it work? (see the Real tree)
-
+#It is in the real tree so it works
 nice_sum(3,4) # We have not implemented this! Why does it work? (see the Real tree)
 
 nice_product(a::Float64,b::Float64) = "The product of these two Float64 is $(a*b)"
@@ -47,7 +48,9 @@ nice_product(a::Float64,b::Float64) = "The product of these two Float64 is $(a*b
 nice_product(1.0,3.0) # Default is Float64
 
 nice_product(1,3) # Why this is not working? (check the Real tree again)
+#It is not since Integer is not a part of the branch tree of the Float64
 
+## Multiple Dispatching where we are defining same function with different methods or operations
 nice_division(a::Int,b::Int) = "The quotient of these two Integer numbers is $(a/b)"
 
 nice_division(a::Real,b::Real) = "The quotient of these two Real numbers is $(a/b)"
@@ -64,40 +67,44 @@ nice_division(3,4.5)
 
 nice_division(4.5,3)
 
+## Defining Structures
+# for a given r and d, we want a vetor that has [r,r^1,r^2,...,r^(d)]
 struct ExponentialDiagonalVector1
 	r
-	d::Int
+	d::Int # we are only fixing d as integer but r can be numbers or matrices
 end
 
 A = ExponentialDiagonalVector1(3.0,2)
 
 typeof(A)
 
+# We specify what T is and it will print out when we use type()
 struct ExponentialDiagonalVector2{T<:Number}
-	r::T
+	r::T #we are assigning that r must be a part of the number tree
 	d::Int
 end
 
-begin
+#begin
 # begin end are only needed for Pluto (to include more than one instruction in a cell)
   B = ExponentialDiagonalVector2(4.0,5)
   C = ExponentialDiagonalVector2(6,5)
-end
+#end
 
 typeof(B)
 
 typeof(C)
 
+#Now we are allowing r to be a vector
 struct ExponentialDiagonalVector3{T} <: AbstractVector{T} # or AbstractArray{T,1}
 	r::T
 	d::Int
 end
 
-begin
+#begin
     Base.size(A::ExponentialDiagonalVector3) = (A.d,A.d)
-	Base.IndexStyle(::Type{ExponentialDiagonalVector3}) = IndexLinear()
-	Base.getindex(A::ExponentialDiagonalVector3,i::Int) = A.r^i
-end
+	Base.IndexStyle(::Type{ExponentialDiagonalVector3}) = IndexLinear() #It is how we store the matrix pointer, we are just using a linear style
+	Base.getindex(A::ExponentialDiagonalVector3,i::Int) = A.r^i #it with given i which we provide, we would calculate r^i
+#end
 
 md"# Introduction to Julia
 
@@ -177,6 +184,7 @@ You can find it here: [https://docs.julialang.org/en/v1/manual/interfaces/](http
 To understand the interface is too much at this stage. Let us consider the _required_ methods.
 "
 
+#D is size and d is 4
 D = ExponentialDiagonalVector3(4.0,3)
 
 getindex(D,5)
