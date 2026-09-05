@@ -176,6 +176,30 @@ slope = compute_slope(ndofs_1,eh1_1,log10,log10)
 
 # ╔═╡ fc6d6cc2-d7ec-4b50-a554-91bfe1a2e960
 md"*Answer:* _Please provide your answer to the exercise 1.1 here_"
+#Test1
+u_1(x) = sin(2π*x[1])
+ps_1 = collect(1:5)
+ncells_1 = [2^i for i in 2:5]
+
+eh1_1, ndofs_1, uhs_1 =
+    hp_refinement(u_1, ps_1, ncells_1)
+
+convergence_plot(
+    ndofs_1,
+    eh1_1,
+    ps_1
+) #Defined later on, but would be easy to do so
+
+slope_1 =
+    compute_slope(
+        ndofs_1,
+        eh1_1,
+        log10,
+        log10
+    )#Defined later on, but would be easy to do so
+
+println("Test 1 slopes = ", slope_1)
+
 
 # ╔═╡ 0ff1e8f7-3631-42bc-ba44-8a36acc3987d
 md"# Test 2
@@ -213,7 +237,7 @@ slope_2 = compute_slope(ndofs_2,eh1_2,log10,log10)
 
 # ╔═╡ 0af1d193-29ed-4126-8e70-4ac68317db08
 md"*Answer:* _Please provide your answer to the exercise 2.1 here_"
-
+println("Test 2 slopes = ", slope_2)
 # ╔═╡ a58e2650-d7cf-4f2f-8279-66819a141541
 md"# Test 3
 
