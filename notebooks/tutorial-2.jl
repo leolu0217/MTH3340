@@ -121,6 +121,8 @@ md"# Test 1
  think about the numerical slope? Is it what we should expect from theory?"
 
 # ╔═╡ 7427dae3-8ae8-417b-8126-74490bd6ddc4
+
+
 md"We start running the `hp_refinement` function above for the specified values."
 
 # ╔═╡ 2ef28813-8a53-4c57-bc75-3c7527ad3e9e
